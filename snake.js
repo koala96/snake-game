@@ -38,6 +38,11 @@ function draw() {
     }
 
     gameContext.drawImage(foodImage, food.x, food.y);
+    gameContext.fillStyle = "white";
+    gameContext.font = '45px sans-serif';
+    gameContext.fillText(score, 0.5 * unit, 1.5 * unit);
+
+
 }
 
 let game = setInterval(draw, 100);
