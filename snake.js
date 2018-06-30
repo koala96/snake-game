@@ -23,6 +23,23 @@ snake[0] = {
     y: 13 * unit
 }
 
+let direction;
+
+document.addEventListener("keydown", function (e) {
+    let key = e.keyCode;
+
+    if (key == "37") {
+        direction = "LEFT";
+    }
+    else if (key == "38") {
+        direction = "UP";
+    } else if (key == "39") {
+        direction = "RIGHT";
+    } else if (key == "40") {
+        direction = "DOWN";
+    }
+})
+
 function draw() {
     gameContext.drawImage(groundImage, 0, 0);
 
