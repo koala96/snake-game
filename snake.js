@@ -28,18 +28,18 @@ let direction;
 document.addEventListener("keydown", function (e) {
     let key = e.keyCode;
 
-    if (key == "37") {
+    if (key == "37" && direction != "RIGHT") {
         direction = "LEFT";
         console.log("LIJEVO");
     }
-    else if (key == "38") {
+    else if (key == "38" &&  direction != "DOWN") {
         direction = "UP";
         console.log("GORE");
         
-    } else if (key == "39") {
+    } else if (key == "39" && direction != "LEFT") {
         console.log("DESNO");
         direction = "RIGHT";
-    } else if (key == "40") {
+    } else if (key == "40" && direction != "UP") {
         console.log("DOLE");
         direction = "DOWN";
     }
@@ -64,17 +64,30 @@ function draw() {
     let snakeXp = snake[0].x;
     let snakeYp = snake[0].y;
 
-    snake.pop();
 
-    if(direction == "LEFT") snakeXp-=unit;
-    if(direction == "UP") snakeYp-=unit;
-    if(direction == "RIGHT") snakeXp+=unit;
-    if(direction == "DOWN") snakeYp+= unit;
+
+    if(direction == "LEFT")
+    {
+        snakeXp-=unit;
+    } 
+
+    if(direction == "UP")
+    {
+        snakeYp-=unit;
+    } 
+    if(direction == "RIGHT")
+    {
+        snakeXp+=unit;
+    } 
+    if(direction == "DOWN")
+    {
+        snakeYp+= unit;
+    } 
 
     if(snakeXp == food.x && snakeYp == food.y)
     {
         score ++;
-        let food = {
+        food = {
             x: Math.floor(Math.random() * 14 + 1) * unit,
             y: Math.floor(Math.random() * 20 + 1) * unit,
         }        
