@@ -10,7 +10,7 @@ const groundImage = new Image();
 groundImage.src = "img/ground.jpeg";
 
 const foodImage = new Image();
-foodImage.src = "img/apple.png"
+foodImage.src = "img/cow.png"
 
 const unit = 30;
 
