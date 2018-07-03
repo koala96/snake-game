@@ -61,16 +61,36 @@ function eventListener() {
     })
 }
 
-
 //======================================================//
-// Function for drawing objects on canvas               //
+// Function for drawing backgorund image for game       //
 //======================================================//
-function drawOnCanvas() {
-
-    //Background Image
+function drawBackground() {
     gameContext.drawImage(groundImage, 0, 0);
+}
 
-    //Snake object
+
+//======================================================//
+// Function for drawing score of the game               //
+//======================================================//
+function drawScore() {
+    gameContext.fillStyle = "white";
+    gameContext.font = '45px sans-serif';
+    gameContext.fillText(score, 0.5 * unit, 1.5 * unit);
+}
+
+
+//======================================================//
+// Function for drawing food object for game            //
+//======================================================//
+function drawFood() {
+    gameContext.drawImage(foodImage, food.x, food.y);
+}
+
+
+//======================================================//
+// Function for drawing snake object for game           //
+//======================================================//
+function drawSnake() {
     for (let i = 0; i < snake.length; i++) {
         if (i == 0) {
             gameContext.fillStyle = 'blue';
@@ -81,14 +101,20 @@ function drawOnCanvas() {
 
         gameContext.fillRect(snake[i].x, snake[i].y, unit, unit);
     }
+}
 
-    //Food object
-    gameContext.drawImage(foodImage, food.x, food.y);
 
-    //Score
-    gameContext.fillStyle = "white";
-    gameContext.font = '45px sans-serif';
-    gameContext.fillText(score, 0.5 * unit, 1.5 * unit);
+//======================================================//
+// Function for drawing objects on canvas               //
+//======================================================//
+function drawOnCanvas() {
+
+    //Invoking methods for drawing game objects on canvas
+    eventListener();
+    drawBackground();
+    drawSnake();
+    drawFood();
+    drawScore();
 
     let snakeXp = snake[0].x;
     let snakeYp = snake[0].y;
@@ -126,9 +152,10 @@ function drawOnCanvas() {
     }
 
     //When snake hits border of ground 
-    if (snakeXp < -unit + 1 || snakeXp > 19 * unit || snakeYp < -unit + 1 || snakeYp > 19 * unit || isDead(snakeHead, snake)) {
+    if (snakeXp < 0 || snakeXp > 19 * unit || snakeYp < 0 || snakeYp > 19 * unit || isDead(snakeHead, snake)) {
         clearInterval(game);
-        location.reload();
+        setTimeout(location.reload.bind(location), 800);
+        
     }
 
     //When snake hits her body
@@ -142,5 +169,4 @@ function drawOnCanvas() {
     }
     snake.unshift(snakeHead);
 }
-let game = setInterval(drawOnCanvas, 100);
-eventListener();
+let game = setInterval(drawOnCanvas, 80);
