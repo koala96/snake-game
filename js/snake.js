@@ -2,6 +2,9 @@
 //Constant variables: groundImage - image for canvas background//
 //                    foodImage - image for food object        //
 //                    unit - one piece of ground               //
+//                    snakeMoving - audio for moving snake     //
+//                    snakeHit - audio when snake hits border  //
+//                    eatCow - audio when snake eats cow       //
 //=============================================================//
 const snakeCanvas = document.getElementById("snake");
 const gameContext = snakeCanvas.getContext('2d');
@@ -11,6 +14,15 @@ groundImage.src = "img/ground.jpeg";
 
 const foodImage = new Image();
 foodImage.src = "img/cow.png"
+
+const snakeMoving = new Audio();
+snakeMoving.src = "audio/keyboardclick.wav";
+
+const snakeHit = new Audio();
+snakeHit.src = "audio/punch.wav";
+
+const eatCow = new Audio();
+eatCow.src = "audio/eatCow.wav";
 
 const unit = 30;
 
@@ -44,17 +56,21 @@ function eventListener() {
         let key = e.keyCode;
 
         if (key == "37" && direction != "RIGHT") {
+            snakeMoving.play();
             direction = "LEFT";
             console.log("LEFT");
         }
         else if (key == "38" && direction != "DOWN") {
+            snakeMoving.play();
             direction = "UP";
             console.log("UP");
 
         } else if (key == "39" && direction != "LEFT") {
+            snakeMoving.play();
             console.log("RIGHT");
             direction = "RIGHT";
         } else if (key == "40" && direction != "UP") {
+            snakeMoving.play();
             console.log("DOWN");
             direction = "DOWN";
         }
@@ -136,6 +152,7 @@ function drawOnCanvas() {
 
     //Snake grow
     if (snakeXp == food.x && snakeYp == food.y) {
+        eatCow.play();
         score++;
         food = {
             x: Math.floor(Math.random() * 20) * unit,
@@ -153,6 +170,7 @@ function drawOnCanvas() {
 
     //When snake hits border of ground 
     if (snakeXp < 0 || snakeXp > 19 * unit || snakeYp < 0 || snakeYp > 19 * unit || isDead(snakeHead, snake)) {
+        snakeHit.play();
         clearInterval(game);
         setTimeout(location.reload.bind(location), 800);
         
@@ -162,6 +180,7 @@ function drawOnCanvas() {
     function isDead(head, array) {
         for (let i = 0; i < array.length; i++) {
             if (head.x == array[i].x && head.y == array[i].y) {
+                snakeHit.play();
                 return true;
             }
         }
