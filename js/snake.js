@@ -168,16 +168,8 @@ let drawOnCanvas = () => {
         y: snakeYp
     }
 
-    //When snake hits border of ground 
-    if (snakeXp < 0 || snakeXp > 19 * unit || snakeYp < 0 || snakeYp > 19 * unit || isDead(snakeHead, snake)) {
-        snakeHit.play();
-        clearInterval(game);
-        setTimeout(location.reload.bind(location), 800);
-        
-    }
-
     //When snake hits her body
-    function isDead(head, array) {
+    let isDead = (head, array) => {
         for (let i = 0; i < array.length; i++) {
             if (head.x == array[i].x && head.y == array[i].y) {
                 snakeHit.play();
@@ -185,6 +177,14 @@ let drawOnCanvas = () => {
             }
         }
         return false;
+    }
+
+    //When snake hits border of ground 
+    if (snakeXp < 0 || snakeXp > 19 * unit || snakeYp < 0 || snakeYp > 19 * unit || isDead(snakeHead, snake)) {
+        snakeHit.play();
+        clearInterval(game);
+        setTimeout(location.reload.bind(location), 800);
+        
     }
     snake.unshift(snakeHead);
 }
