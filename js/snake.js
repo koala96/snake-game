@@ -51,7 +51,7 @@ let direction;
 //======================================================//
 // Function for adding event listener on Keyboard Arrays//
 //======================================================//
-function eventListener() {
+ let eventListener = () => {
     document.addEventListener("keydown", function (e) {
         let key = e.keyCode;
 
@@ -80,7 +80,7 @@ function eventListener() {
 //======================================================//
 // Function for drawing backgorund image for game       //
 //======================================================//
-function drawBackground() {
+let drawBackground = () => {
     gameContext.drawImage(groundImage, 0, 0);
 }
 
@@ -88,7 +88,7 @@ function drawBackground() {
 //======================================================//
 // Function for drawing score of the game               //
 //======================================================//
-function drawScore() {
+let drawScore = () => {
     gameContext.fillStyle = "white";
     gameContext.font = '45px sans-serif';
     gameContext.fillText(score, 0.5 * unit, 1.5 * unit);
@@ -98,7 +98,7 @@ function drawScore() {
 //======================================================//
 // Function for drawing food object for game            //
 //======================================================//
-function drawFood() {
+let drawFood = () => {
     gameContext.drawImage(foodImage, food.x, food.y);
 }
 
@@ -106,7 +106,7 @@ function drawFood() {
 //======================================================//
 // Function for drawing snake object for game           //
 //======================================================//
-function drawSnake() {
+let drawSnake = () => {
     for (let i = 0; i < snake.length; i++) {
         if (i == 0) {
             gameContext.fillStyle = 'blue';
@@ -123,7 +123,7 @@ function drawSnake() {
 //======================================================//
 // Function for drawing objects on canvas               //
 //======================================================//
-function drawOnCanvas() {
+let drawOnCanvas = () => {
 
     //Invoking methods for drawing game objects on canvas
     eventListener();
